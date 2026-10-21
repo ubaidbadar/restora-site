@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-import { Check } from 'lucide-react';
 import ClosingCta from '@/components/closing_cta';
-import FeatureIcon from '@/components/feature_icon';
 import PageIntro from '@/components/page_intro';
 import FEATURES from '@/constants/features';
 
@@ -11,25 +9,23 @@ export const metadata: Metadata = {
   alternates: { canonical: '/features' },
 };
 
-/** Everything Restora does, one section per area, each with what is in it. */
+/** Everything Restora does: one row per area, the summary on one side and what is in it on the other. */
 export default function FeaturesPage() {
   return (
     <>
-      <PageIntro eyebrow="Features" title="Everything your restaurant runs on, in one app">
-        <p>From the first order of the day to the khata at closing. Here is what is in Restora today.</p>
+      <PageIntro title="Everything a restaurant runs on.">
+        <p>From the first order of the day to the khata at closing. This is what is in Restora today, and all of it is free.</p>
       </PageIntro>
-      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-10 sm:px-6">
+      <div className="mx-auto max-w-[76rem] px-5 pb-24 sm:px-8">
         {FEATURES.map((feature) => (
-          <section key={feature.id} id={feature.id} className="reveal grid scroll-mt-24 gap-6 rounded-card bg-surface p-6 shadow-card sm:p-8 md:grid-cols-[1fr_1fr]">
-            <div className="flex flex-col gap-3">
-              <FeatureIcon name={feature.icon} />
-              <h2 className="text-2xl font-bold text-ink">{feature.title}</h2>
-              <p className="text-base text-body">{feature.summary}</p>
+          <section key={feature.id} id={feature.id} className="grid scroll-mt-24 gap-6 border-t-[3px] border-ink py-12 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
+            <div>
+              <h2 className="display text-[clamp(2rem,4.5vw,3.25rem)]">{feature.title}</h2>
+              <p className="mt-4 max-w-xl text-lg text-ink-2">{feature.summary}</p>
             </div>
-            <ul className="flex flex-col gap-3 md:pt-14">
+            <ul className="flex flex-col divide-y divide-rule self-start border-y border-rule">
               {feature.points.map((point) => (
-                <li key={point} className="flex gap-3 text-base text-ink">
-                  <Check className="mt-0.5 size-5 shrink-0 text-success-700" aria-hidden="true" />
+                <li key={point} className="py-3 text-ink">
                   {point}
                 </li>
               ))}

@@ -12,11 +12,11 @@ export const metadata: Metadata = {
 export default function DemoPage() {
   return (
     <>
-      <PageIntro eyebrow="Demo" title="See it with your own menu">
+      <PageIntro title="See it with your own menu.">
         <p>A short walkthrough on a WhatsApp call, for you and whoever runs the counter. We can set up your menu and tables with you.</p>
       </PageIntro>
-      <section className="px-4 py-10 sm:px-6">
-        <div className="mx-auto max-w-xl">
+      <section className="mx-auto max-w-[76rem] px-5 pb-24 sm:px-8">
+        <div className="max-w-xl">
           <DemoForm />
         </div>
       </section>

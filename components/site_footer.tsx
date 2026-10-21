@@ -11,42 +11,42 @@ const COLUMNS = [
   { title: 'Legal', links: [{ href: '/privacy', label: 'Privacy' }, { href: '/terms', label: 'Terms' }, { href: '/refunds', label: 'Refunds' }] },
 ];
 
-/** The bottom of every page: what Restora is, the pages, how to reach us. */
+/** The bottom of every page, continuing the night background: how to reach us, and every page. */
 export default function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-surface">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_repeat(3,1fr)]">
-        <div className="flex flex-col gap-4">
-          <Logo />
-          <p className="max-w-xs text-sm text-muted">{SITE.tagline}. Made in Pakistan, for Pakistani restaurants.</p>
-          <div className="flex flex-col gap-2 text-sm">
-            <a href={whatsappLink()} target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-medium text-ink hover:text-accent-text">
-              <WhatsappIcon className="size-4 text-whatsapp" />
-              WhatsApp {SITE.whatsappDisplay}
+    <footer className="border-t border-white/10 bg-night text-moon">
+      <div className="mx-auto grid max-w-[76rem] gap-12 px-5 py-16 sm:px-8 md:grid-cols-[1.6fr_repeat(3,1fr)]">
+        <div className="flex flex-col gap-5">
+          <Logo light />
+          <p className="max-w-xs">Made in Pakistan, for the restaurants here.</p>
+          <div className="flex flex-col gap-2">
+            <a href={whatsappLink()} target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-white hover:text-haldi">
+              <WhatsappIcon className="size-5 text-whatsapp" />
+              {SITE.whatsappDisplay}
             </a>
-            <a href={`mailto:${SITE.email}`} className="font-medium text-ink hover:text-accent-text">
+            <a href={`mailto:${SITE.email}`} className="font-semibold text-white hover:text-haldi">
               {SITE.email}
             </a>
           </div>
         </div>
         {COLUMNS.map((column) => (
           <nav key={column.title} aria-label={column.title} className="flex flex-col gap-3">
-            <h2 className="text-sm font-semibold text-ink">{column.title}</h2>
+            <h2 className="font-sans text-sm font-semibold text-white/60">{column.title}</h2>
             {column.links.map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm text-body hover:text-ink">
+              <Link key={link.href} href={link.href} className="hover:text-white">
                 {link.label}
               </Link>
             ))}
             {column.title === 'Product' && (
-              <a href={appLink('/login', 'footer')} className="text-sm text-body hover:text-ink">
+              <a href={appLink('/login', 'footer')} className="hover:text-white">
                 Sign in
               </a>
             )}
           </nav>
         ))}
       </div>
-      <div className="border-t border-border">
-        <p className="mx-auto max-w-6xl px-4 py-5 text-xs text-muted sm:px-6">Restora · restora.live</p>
+      <div className="mx-auto max-w-[76rem] px-5 sm:px-8">
+        <p className="border-t border-white/10 py-6 text-sm text-white/60">© Restora. restora.live</p>
       </div>
     </footer>
   );

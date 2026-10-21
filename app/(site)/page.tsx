@@ -1,42 +1,29 @@
-import { BellRing, Check, ChefHat, QrCode, ReceiptText, Smartphone } from 'lucide-react';
+import Link from 'next/link';
 import ButtonLink from '@/components/button_link';
 import ClosingCta from '@/components/closing_cta';
+import EveningTimeline from '@/components/evening_timeline';
 import FaqList from '@/components/faq_list';
-import FeatureIcon from '@/components/feature_icon';
 import JsonLd from '@/components/json_ld';
+import KhataCompare from '@/components/khata_compare';
+import PriceSlip from '@/components/price_slip';
+import PrintSlip from '@/components/print_slip';
 import ProductShots from '@/components/product_shots';
-import SectionHeading from '@/components/section_heading';
 import FAQS from '@/constants/faqs';
-import FEATURES from '@/constants/features';
 import SITE from '@/constants/site';
 import WhatsappIcon from '@/icons/whatsapp_icon';
 import appLink from '@/utils/app_link';
 import whatsappLink from '@/utils/whatsapp_link';
 
-const FLOW = [
-  { icon: QrCode, title: 'The guest scans the table', text: 'Your menu opens on their phone. They can call a waiter or ask for the bill from the table.' },
-  { icon: Smartphone, title: 'The waiter takes the order', text: 'On their own phone: dishes, sizes, add-ons and notes, for that table.' },
-  { icon: ChefHat, title: 'The kitchen gets the slip', text: 'Printed at once, and the order moves from new to preparing to ready on the board.' },
-  { icon: ReceiptText, title: 'Paid, or on khata', text: 'Cash, card, JazzCash or Easypaisa, or added to the customer\'s khata. Receipt on WhatsApp.' },
+const FOR_HERE = [
+  { title: 'Load-shedding and slow data', text: 'Orders are saved on the phone when the connection drops and sent when it is back.' },
+  { title: 'Khata customers', text: 'Bills on khata, part payments, and a statement on WhatsApp.' },
+  { title: 'JazzCash, Easypaisa, cash and card', text: 'Every way your customers pay, with tax set per payment method.' },
+  { title: 'Phones you already own', text: 'Android, iPhone, tablet or laptop. No till to buy, nothing to install on a PC.' },
+  { title: 'Waiters, not IT staff', text: 'Tables, orders and calls on their own phone, with only what their role needs.' },
+  { title: 'More than one branch', text: 'Switch branch in a tap, and see every branch\'s numbers together.' },
 ];
 
-const LOCAL = [
-  { title: 'Keeps going offline', text: 'Orders are saved on the device when the internet drops and sent when it is back.' },
-  { title: 'Khata, not a notebook', text: 'Bills on khata, part payments, and statements sent on WhatsApp.' },
-  { title: 'WhatsApp, where customers are', text: 'Receipts, khata statements and "we miss you" messages in a tap.' },
-  { title: 'Rupees and local payments', text: 'Cash, card, JazzCash, Easypaisa and bank transfer, with tax per method.' },
-  { title: 'Phones you already have', text: 'Android, iPhone, tablet or laptop. Nothing to buy, nothing to install on a PC.' },
-  { title: 'Urdu names and notes', text: 'Customers, dishes and notes can be written in Urdu. A full Urdu app is coming.' },
-];
-
-const ROLES = [
-  { who: 'Owner', what: 'Today\'s sales for every branch, cash vs digital, khata owed, and who runs what.' },
-  { who: 'Manager', what: 'Menu, stock, tables, bookings and the team, from the floor.' },
-  { who: 'Waiter', what: 'Tables, guest calls and orders on their own phone.' },
-  { who: 'Cashier', what: 'Payments, discounts with permission, receipts and khata.' },
-];
-
-/** restora.live: what Restora is, how a night runs on it, why it fits Pakistan, what it costs, and the way in. */
+/** restora.live: a receipt printing, one evening on Restora, khata, the real app, what it costs, questions. */
 export default function HomePage() {
   return (
     <>
@@ -51,131 +38,103 @@ export default function HomePage() {
         }}
       />
 
-      {/* Hero */}
-      <section className="overflow-hidden bg-gradient-to-b from-primary-soft via-canvas to-canvas">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pt-12 pb-16 sm:px-6 lg:grid-cols-[1fr_1.15fr] lg:pt-20">
-          <div className="flex flex-col items-start gap-6">
-            <p className="inline-flex items-center gap-2 rounded-pill bg-surface px-3 py-1 text-sm font-medium text-accent-text shadow-card">
-              <span className="size-2 rounded-pill bg-art-leaf" aria-hidden="true" />
-              Free while we grow · no card needed
-            </p>
-            <h1 className="text-4xl leading-[1.08] font-bold text-ink sm:text-5xl lg:text-6xl">Orders, tables and khata for your restaurant.</h1>
-            <p className="max-w-xl text-lg text-body sm:text-xl">Take orders on any phone, serve tables with QR codes, keep khata and bring customers back on WhatsApp. Even when the internet isn&apos;t working.</p>
-            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <ButtonLink href={appLink('/signup', 'home-hero')} size="lg">
-                Start free
-              </ButtonLink>
-              <ButtonLink href={whatsappLink()} size="lg" variant="outline">
-                <WhatsappIcon className="size-5 text-whatsapp" />
-                WhatsApp us
-              </ButtonLink>
-            </div>
-            <p className="text-sm text-muted">Works on Android, iPhone, tablet and laptop.</p>
-          </div>
-          <ProductShots />
-        </div>
-      </section>
-
-      {/* One order, start to finish */}
-      <section className="px-4 py-20 sm:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col gap-10">
-          <SectionHeading eyebrow="How a night runs" title="One order, from the table to the bill">
-            Everyone works on the same orders, on their own phone, and nothing is written twice.
-          </SectionHeading>
-          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {FLOW.map((step, index) => (
-              <li key={step.title} className="reveal flex flex-col gap-3 rounded-card bg-surface p-5 shadow-card">
-                <div className="flex items-center justify-between">
-                  <span className="grid size-11 place-items-center rounded-control bg-primary-soft text-accent-text">
-                    <step.icon className="size-5.5" aria-hidden="true" />
-                  </span>
-                  <span className="text-sm font-semibold text-subtle">0{index + 1}</span>
-                </div>
-                <h3 className="text-lg font-semibold text-ink">{step.title}</h3>
-                <p className="text-base text-body">{step.text}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Built for Pakistan */}
-      <section className="bg-surface px-4 py-20 sm:px-6">
-        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <SectionHeading eyebrow="Made in Pakistan" title="Built for how restaurants here really work">
-            Load-shedding, slow mobile data, khata customers and WhatsApp everything. Restora was made for that, not adapted to it.
-          </SectionHeading>
-          <ul className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
-            {LOCAL.map((item) => (
-              <li key={item.title} className="reveal flex gap-3">
-                <Check className="mt-1 size-5 shrink-0 text-success-700" aria-hidden="true" />
-                <div>
-                  <h3 className="text-base font-semibold text-ink">{item.title}</h3>
-                  <p className="text-base text-body">{item.text}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="px-4 py-20 sm:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col gap-10">
-          <SectionHeading eyebrow="Everything in one app" title="What Restora does" center>
-            No add-ons to buy and no separate apps for the kitchen, the counter and the owner.
-          </SectionHeading>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURES.map((feature) => (
-              <a key={feature.id} href={`/features#${feature.id}`} className="reveal group flex flex-col gap-3 rounded-card bg-surface p-5 shadow-card transition-shadow hover:shadow-lg">
-                <FeatureIcon name={feature.icon} />
-                <h3 className="text-lg font-semibold text-ink group-hover:text-accent-text">{feature.title}</h3>
-                <p className="text-sm text-body">{feature.summary}</p>
-              </a>
-            ))}
+      {/* The hero: the headline, and a receipt printing out of the counter printer. */}
+      <section className="mx-auto grid max-w-[76rem] items-start gap-14 px-5 pt-14 pb-20 sm:px-8 lg:grid-cols-[1.25fr_0.75fr] lg:pt-20 lg:pb-32">
+        <div>
+          <h1 className="display text-[clamp(3.25rem,9.5vw,7.5rem)] text-ink">Run your restaurant from your phone.</h1>
+          <p className="mt-8 max-w-xl text-xl text-ink-2">
+            Orders, tables, khata and WhatsApp in one app your waiters can use on the first night. It keeps working when the internet doesn&apos;t, and it is free.
+          </p>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <ButtonLink href={appLink('/signup', 'home-hero')} size="lg">
+              Start free
+            </ButtonLink>
+            <ButtonLink href={whatsappLink()} size="lg" variant="outline">
+              <WhatsappIcon className="size-5" />
+              WhatsApp us
+            </ButtonLink>
           </div>
         </div>
+        <div className="lg:pt-6">
+          <PrintSlip />
+        </div>
       </section>
 
-      {/* Roles */}
-      <section className="bg-surface px-4 py-20 sm:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col gap-10">
-          <SectionHeading eyebrow="One app for everyone" title="Each person sees what their job needs">
-            Invite your team by email or WhatsApp. Their role decides what they can do; their branch decides where.
-          </SectionHeading>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {ROLES.map((role) => (
-              <div key={role.who} className="reveal flex flex-col gap-2 rounded-card border border-border p-5">
-                <h3 className="text-lg font-semibold text-ink">{role.who}</h3>
-                <p className="text-base text-body">{role.what}</p>
-              </div>
-            ))}
-          </div>
-          <p className="flex items-center gap-2 text-base text-body">
-            <BellRing className="size-5 text-accent-text" aria-hidden="true" />
-            When a guest calls from their table, it shows on the Tables screen for every waiter.
+      <EveningTimeline />
+
+      {/* Khata */}
+      <section className="mx-auto grid max-w-[76rem] items-center gap-14 px-5 py-24 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:py-32">
+        <div>
+          <h2 className="display text-[clamp(2.6rem,6vw,4.75rem)]">Close the khata register.</h2>
+          <p className="mt-6 max-w-md text-lg text-ink-2">
+            Put a bill on a customer&apos;s khata in one tap. Take part payments in cash or JazzCash. When they ask how much, send their statement on WhatsApp instead of turning pages.
           </p>
         </div>
+        <KhataCompare />
       </section>
 
-      {/* Price */}
-      <section className="px-4 py-20 sm:px-6">
-        <div className="reveal mx-auto flex max-w-3xl flex-col items-center gap-5 rounded-panel bg-surface p-8 text-center shadow-card sm:p-12">
-          <p className="text-sm font-semibold text-accent-text">Pricing</p>
-          <h2 className="text-3xl font-bold text-ink sm:text-4xl">Free. Every feature, every branch.</h2>
-          <p className="max-w-xl text-lg text-body">Restora is free while we grow. No card, no trial that runs out. If paid plans ever come, you will hear from us long before.</p>
-          <ButtonLink href="/pricing" variant="outline">
-            See what is included
-          </ButtonLink>
+      {/* The real app */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[76rem] px-5 pt-24 pb-32 sm:px-8 lg:pt-32 lg:pb-40">
+          <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+            <h2 className="display text-[clamp(2.6rem,6vw,4.75rem)]">This is the app, not a drawing of it.</h2>
+            <p className="max-w-md text-lg text-ink-2 lg:justify-self-end">The owner&apos;s screen at Lahori Karahi House: today&apos;s sales, cash against digital, and the regulars who have not been back in a month.</p>
+          </div>
+          <div className="mt-14 lg:mx-10">
+            <ProductShots />
+          </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="px-4 pb-4 sm:px-6">
-        <div className="mx-auto flex max-w-3xl flex-col gap-8">
-          <SectionHeading title="Questions owners ask" center />
-          <FaqList />
+      {/* Made for here */}
+      <section className="mx-auto max-w-[76rem] px-5 py-24 sm:px-8 lg:py-32">
+        <h2 className="display max-w-3xl text-[clamp(2.6rem,6vw,4.75rem)]">Made for how restaurants here really work.</h2>
+        <dl className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {FOR_HERE.map((item) => (
+            <div key={item.title} className="border-t-[3px] border-ink pt-5">
+              <dt className="text-xl font-semibold tracking-tight">{item.title}</dt>
+              <dd className="mt-2 text-ink-2">{item.text}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-14 text-lg">
+          <Link href="/features" className="font-semibold text-indigo underline decoration-2 underline-offset-[6px] hover:text-indigo-deep">
+            Everything Restora does
+          </Link>
+        </p>
+      </section>
+
+      {/* Price, as a bill */}
+      <section className="bg-haldi">
+        <div className="mx-auto grid max-w-[76rem] items-center gap-14 px-5 py-24 sm:px-8 lg:grid-cols-2 lg:py-32">
+          <div>
+            <h2 className="display text-[clamp(2.6rem,6vw,4.75rem)] text-ink">Free while we grow.</h2>
+            <p className="mt-6 max-w-md text-lg text-ink">
+              Every feature, every branch, every member of staff. If paid plans ever come, you will hear from us long before, and your data stays yours.
+            </p>
+            <div className="mt-8">
+              <ButtonLink href={appLink('/signup', 'home-price')} size="lg">
+                Start free
+              </ButtonLink>
+            </div>
+          </div>
+          <PriceSlip />
         </div>
+      </section>
+
+      {/* Questions */}
+      <section className="mx-auto grid max-w-[76rem] gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:py-32">
+        <div>
+          <h2 className="display text-[clamp(2.6rem,6vw,4.75rem)]">Questions owners ask.</h2>
+          <p className="mt-6 max-w-sm text-lg text-ink-2">
+            Anything else, ask on{' '}
+            <a href={whatsappLink()} target="_blank" rel="noopener" className="font-semibold text-indigo underline decoration-2 underline-offset-4">
+              WhatsApp
+            </a>
+            .
+          </p>
+        </div>
+        <FaqList />
       </section>
 
       <ClosingCta from="home-end" />
