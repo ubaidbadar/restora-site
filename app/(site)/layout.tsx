@@ -6,7 +6,7 @@ import SiteHeader from '@/components/site_header';
 export default function SiteLayout({ children }: LayoutProps<'/'>) {
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-50 focus:rounded-control focus:bg-surface focus:px-4 focus:py-2">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-50 focus:rounded-control focus:bg-paper focus:px-4 focus:py-2">
         Skip to content
       </a>
       <SiteHeader />
@@ -14,7 +14,7 @@ export default function SiteLayout({ children }: LayoutProps<'/'>) {
         {children}
       </main>
       <SiteFooter />
-      <div className="h-20 md:hidden" aria-hidden="true" />
+      <div className="h-20 bg-night md:hidden" aria-hidden="true" />
       <MobileCtaBar />
     </>
   );

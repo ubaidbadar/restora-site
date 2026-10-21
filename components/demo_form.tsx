@@ -20,7 +20,7 @@ export default function DemoForm() {
 
   return (
     <form
-      className="flex flex-col gap-4 rounded-card bg-surface p-6 shadow-card sm:p-8"
+      className="flex flex-col gap-5 rounded-panel bg-paper p-6 shadow-slip sm:p-8"
       onSubmit={(event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -37,29 +37,29 @@ export default function DemoForm() {
       }}
     >
       {FIELDS.map((field) => (
-        <label key={field.name} className="flex flex-col gap-1.5 text-sm font-medium text-ink">
+        <label key={field.name} className="flex flex-col gap-1.5 text-[0.95rem] font-semibold text-ink">
           <span>
             {field.label}
-            {field.required && <span className="text-danger-700"> *</span>}
+            {field.required && <span className="text-chili"> *</span>}
           </span>
           <input
             name={field.name}
             required={field.required}
             autoComplete={field.autoComplete}
             inputMode={'inputMode' in field ? field.inputMode : undefined}
-            className="min-h-12 rounded-control border border-border-strong bg-surface px-3.5 text-base text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
+            className="min-h-12 rounded-control border-2 border-rule bg-paper px-3.5 text-base font-normal text-ink outline-none focus:border-indigo"
           />
         </label>
       ))}
-      <label className="flex flex-col gap-1.5 text-sm font-medium text-ink">
+      <label className="flex flex-col gap-1.5 text-[0.95rem] font-semibold text-ink">
         Anything we should know (optional)
-        <textarea name="note" rows={3} className="rounded-control border border-border-strong bg-surface px-3.5 py-3 text-base text-ink outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft" />
+        <textarea name="note" rows={3} className="rounded-control border-2 border-rule bg-paper px-3.5 py-3 text-base font-normal text-ink outline-none focus:border-indigo" />
       </label>
-      <button type="submit" className="mt-2 inline-flex min-h-13 items-center justify-center gap-2.5 rounded-control bg-whatsapp px-6 text-base font-semibold text-on-whatsapp hover:bg-whatsapp-hover">
+      <button type="submit" className="mt-2 inline-flex min-h-14 items-center justify-center gap-2.5 rounded-control bg-whatsapp px-6 text-base font-semibold text-on-whatsapp hover:brightness-95">
         <WhatsappIcon className="size-5" />
         Send on WhatsApp
       </button>
-      <p role="status" className="text-sm text-muted">
+      <p role="status" className="text-sm text-ink-3">
         {sent ? 'WhatsApp opened with your request. Press send there, and we will reply with a time that suits you.' : 'This opens WhatsApp with your request typed in. Nothing is saved on this site.'}
       </p>
     </form>

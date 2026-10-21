@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Mail } from 'lucide-react';
-import ButtonLink from '@/components/button_link';
 import PageIntro from '@/components/page_intro';
 import SITE from '@/constants/site';
 import WhatsappIcon from '@/icons/whatsapp_icon';
@@ -13,34 +11,31 @@ export const metadata: Metadata = {
   alternates: { canonical: '/contact' },
 };
 
-/** How to reach a person: WhatsApp first (that is how owners talk), then email. */
+/** How to reach a person: WhatsApp first (that is how owners talk), then email. Big, tappable, nothing else. */
 export default function ContactPage() {
   return (
     <>
-      <PageIntro eyebrow="Contact" title="Talk to a person">
-        <p>Questions, setup help or a demo for your team. WhatsApp is the quickest.</p>
+      <PageIntro title="Talk to a person.">
+        <p>Questions, help setting up your menu, or a walkthrough for your team. WhatsApp is the quickest.</p>
       </PageIntro>
-      <section className="px-4 py-10 sm:px-6">
-        <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
-          <div className="reveal flex flex-col gap-4 rounded-card bg-surface p-6 shadow-card">
-            <WhatsappIcon className="size-8 text-whatsapp" />
-            <h2 className="text-xl font-semibold text-ink">WhatsApp</h2>
-            <p className="text-base text-body">{SITE.whatsappDisplay} · message or call</p>
-            <ButtonLink href={whatsappLink()} variant="whatsapp">
-              Open WhatsApp
-            </ButtonLink>
-          </div>
-          <div className="reveal flex flex-col gap-4 rounded-card bg-surface p-6 shadow-card">
-            <Mail className="size-8 text-accent-text" aria-hidden="true" />
-            <h2 className="text-xl font-semibold text-ink">Email</h2>
-            <p className="text-base text-body">{SITE.email}</p>
-            <ButtonLink href={`mailto:${SITE.email}`} variant="outline">
-              Write an email
-            </ButtonLink>
-          </div>
-        </div>
-        <p className="mx-auto mt-8 max-w-3xl text-center text-base text-body">
-          Want us to walk your team through it? <Link href="/demo" className="font-semibold text-accent-text underline underline-offset-4">Book a demo</Link>.
+      <section className="mx-auto max-w-[76rem] px-5 pb-24 sm:px-8">
+        <a href={whatsappLink()} target="_blank" rel="noopener" className="group flex flex-wrap items-center justify-between gap-4 border-t-[3px] border-ink py-8">
+          <span>
+            <span className="block text-sm font-semibold text-ink-3">WhatsApp, message or call</span>
+            <span className="display block text-[clamp(2.4rem,7vw,5rem)] group-hover:text-indigo">{SITE.whatsappDisplay}</span>
+          </span>
+          <WhatsappIcon className="size-12 text-whatsapp" />
+        </a>
+        <a href={`mailto:${SITE.email}`} className="group block border-y border-rule py-8">
+          <span className="block text-sm font-semibold text-ink-3">Email</span>
+          <span className="display block text-[clamp(2rem,5.5vw,4rem)] break-all group-hover:text-indigo">{SITE.email}</span>
+        </a>
+        <p className="mt-10 text-lg text-ink-2">
+          Want us to walk your team through it?{' '}
+          <Link href="/demo" className="font-semibold text-indigo underline decoration-2 underline-offset-4">
+            Book a demo
+          </Link>
+          .
         </p>
       </section>
     </>

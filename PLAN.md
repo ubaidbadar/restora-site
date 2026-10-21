@@ -108,20 +108,18 @@ Sticky on phones: a bottom bar with **Start free** and a WhatsApp icon, appearin
 
 ## 6. Look and feel
 
-- **Same design tokens as the web app**: copy the color, radius and shadow tokens from `web/src/index.css` into
-  `app/globals.css` (`@theme`), light and dark. Indigo primary `#4F46E5`, ink `#0F172A`, canvas `#F6F7F9`, the art
-  colors (saffron, chili, leaf, rice, sand) for illustrations.
-- **Font**: Plus Jakarta Sans (the wordmark's font) through `next/font/google`, replacing Geist.
-- **Brand files** from `brand/exports/`: logo, symbol, icon; the OG image from `brand/src/og-image.svg`.
-- **Illustrations**: the cloche drawing from the app's welcome screen, plus a small set in the same style (ticket,
-  chai, WhatsApp chat, QR on a table). Flat, warm, local; no stock photos of people pretending to be customers.
-- **Screenshots**: taken from the real app with demo data (a believable Lahore restaurant), in light mode, exported
-  as AVIF/WebP at 2x, framed with a CSS device frame.
-- **Motion**: little and purposeful. CSS scroll-driven animations for reveals, React `<ViewTransition>` between pages
-  (see `node_modules/next/dist/docs/01-app/02-guides/view-transitions.md`); everything off with
-  `prefers-reduced-motion`.
-- **Dark mode**: follows the system; same tokens as the app.
-- **Mobile first**: designed at 360px wide, then tablet and desktop. Tap targets 44px+.
+- **The idea**: restaurants here run on paper (the parchi, the kitchen slip, the khata register). The site is built
+  from that paper and Restora's indigo: receipts with torn edges, a ruled khata page, a PAID stamp.
+- **Colors** (`app/globals.css`): indigo `#4F46E5` for actions; night `#17134A` for the evening sections and footer;
+  cool canvas `#EEF0F6` and white paper (never cream); haldi `#F5B530` as the highlighter (price section, times);
+  chili only for unpaid and alarms; leaf for paid and online.
+- **Type** (self-hosted with `next/font/local`, files in `app/fonts`): Bricolage Grotesque for big display headings,
+  Instrument Sans for text, IBM Plex Mono only on printed slips, Noto Nastaliq Urdu for Urdu.
+- **Home**: the receipt printing (the one animation on load), one evening at a restaurant as a timeline, khata
+  register against Restora's khata, the real app, made for here, the price as a bill (Rs 0), questions, closing call.
+- **Screenshots**: real app with the demo restaurant (Lahori Karahi House), in `public/screenshots`.
+- **Motion**: only the print and stamp on the home hero; off with `prefers-reduced-motion`.
+- **Mobile first**: checked at 390px; tap targets 44px+; a bottom bar with Start free and WhatsApp on phones.
 
 ---
 
