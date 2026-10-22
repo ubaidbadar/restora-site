@@ -33,7 +33,7 @@ Every page has one main action. Sign in is always one tap away (top right), neve
 | `restora.live` | This site. `www.restora.live` redirects here. |
 | `app.restora.live` | The web app (`web/`): sign in, POS, settings. |
 | `api.restora.live` | The backend (`backend/`). |
-| `restora.live/t/<code>` | Guests scanning a table QR. **Decide**: keep the guest menu on `app.` (today), or redirect from the short address here. Printed QR codes must never change, so pick before printing any for real restaurants. |
+| `restora.live/t/<code>` | Guests scanning a table QR: the table's menu, a cart, sending the order (staff accept it), calling a waiter or the bill. Rendered on this site's server; the browser never calls the API (`API_URL`). Decided 2026-10-22: printed QR codes point here. |
 
 This site also hosts what the phones need:
 - `/.well-known/apple-app-site-association` and `/.well-known/assetlinks.json`, so invitation and password-reset links
@@ -198,7 +198,7 @@ Still open:
 3. **Office city** for the footer and Contact.
 4. **Proof**: any restaurants using it (name, city, a quote, a photo, permission to show).
 5. **Demo**: who answers demo requests, and in how long.
-6. **Guest QR address**: keep on `app.restora.live/t/…` or move to `restora.live/t/…` (see §2).
+6. ~~**Guest QR address**~~: decided, `restora.live/t/…` (see §2).
 7. **Apps**: when they go to the App Store and Google Play (until then, Download says "coming soon" and offers the web app).
 8. **Company**: registered name for the footer and legal pages.
 
