@@ -5,6 +5,7 @@ import CartProvider from '@/components/table_menu/cart_provider';
 import CartBar from '@/components/table_menu/cart_bar';
 import DishCard from '@/components/table_menu/dish_card';
 import MenuSkeleton from '@/components/table_menu/menu_skeleton';
+import OffersCard from '@/components/table_menu/offers_card';
 import { getTableMenu } from '@/utils/table_api';
 
 // A table's own page: nothing to index, nothing to share.
@@ -78,6 +79,7 @@ async function TableMenuView({ params }: Pick<PageProps<'/t/[code]'>, 'params'>)
               </ul>
             </section>
           ))}
+          {categories.length > 0 && <OffersCard code={code} restaurantName={menu.restaurant.name} />}
         </main>
       </div>
       <CartBar tableName={menu.table.name} />

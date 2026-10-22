@@ -47,3 +47,17 @@ export async function callStaff(code: string, kind: 'waiter' | 'bill'): Promise<
   if (!res.ok) return { ok: false, message: res.status === 404 ? res.message : 'We could not reach the staff. Please wave to a waiter.' };
   return { ok: true, message: kind === 'waiter' ? 'A waiter is on the way.' : 'Your bill is on the way.' };
 }
+
+/**
+ * A guest asks for the restaurant's offers on WhatsApp, by choice: a plain form, so it works before the page's
+ * JavaScript has loaded. The API checks the number and saves (or marks) the customer.
+ */
+export async function joinOffers(code: string, _previous: ActionResult | null, form: FormData): Promise<ActionResult> {
+  const name = String(form.get('name') ?? '').trim().slice(0, 80) || undefined;
+  const phone = String(form.get('phone') ?? '').trim();
+  if (form.get('consent') !== 'on') return { ok: false, message: 'Tick the box to agree.' };
+  if (!/^[\d\s+()-]{10,20}$/.test(phone)) return { ok: false, message: 'Enter a mobile number like 0300 1234567.' };
+  const res = await tableApi(code, '/opt-in', { name, phone, consent: true });
+  if (!res.ok) return { ok: false, message: res.message };
+  return { ok: true, message: 'Thank you! You will get offers on WhatsApp now and then.' };
+}
