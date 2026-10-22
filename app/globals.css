@@ -126,3 +126,12 @@
 @utility animate-stamp {
   animation: stamp 420ms var(--ease-print) 2.9s both;
 }
+
+/* A sheet over the guest menu rises from the bottom edge (reduced motion turns it off, above). */
+@keyframes sheet-up {
+  from { translate: 0 100%; }
+  to { translate: 0 0; }
+}
+@utility animate-sheet-up {
+  animation: sheet-up 280ms var(--ease-print) backwards; /* not "both": the pulled position must win once it has risen */
+}
