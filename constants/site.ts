@@ -1,8 +1,10 @@
-/** Where things are, said once. The app's address can be changed per deploy (NEXT_PUBLIC_APP_URL). */
+/** Where things are, said once. The app's and the API's addresses can be changed per deploy (NEXT_PUBLIC_APP_URL, API_URL). */
 const SITE = {
   name: 'Restora',
   url: 'https://restora.live',
   appUrl: process.env.NEXT_PUBLIC_APP_URL ?? 'https://app.restora.live',
+  /** The backend, called only from this site's server (the guest pages behind a table QR). */
+  apiUrl: process.env.API_URL ?? 'https://api.restora.live',
   email: 'admin@restora.live',
   /** International format for links, the local way for people. */
   whatsapp: '923476262068',
